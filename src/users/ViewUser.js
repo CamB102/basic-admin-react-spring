@@ -3,22 +3,25 @@ import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 const ViewUser = () => {
-    const [user, setUser] = useState({
-        name:"",
-        username:"",
-        email:""
-    })
-
     const {id} = useParams()
 
     useEffect(() => {
         loadUser()
     },[])
 
+    const [user, setUser] = useState({
+        firstName: "",
+        lastName: "",
+        role:"",
+        email: "",
+        phoneNumber: "",
+        password:""
+    })
+
+    const {firstName, lastName, role, email, phoneNumber, password} = user
 
     const loadUser = async () => {
-        const response = await axios.get(`http://localhost:8080/user/${id}`)
-        setUser(response.data)
+        const response = await axios.patch(`http://localhost:8080/editUser/${id}`, user)
     }
 
   return (
@@ -28,19 +31,31 @@ const ViewUser = () => {
                 <h3 className='text-center m-4'>User Detail</h3>
                 <div className='card'>
                     <div className='card-header'>
-                        Details of user id: 
+                        Details of user id:
                         <ul className='list-group list-group-flush'>
                             <li className='list-group-item'>
-                                <b>Name:</b>
-                                {user.name}
+                                <b>First Name:</b>
+                                {user.firstName}
                             </li>
                             <li className='list-group-item'>
                                 <b>Username:</b>
-                                {user.username}
+                                {user.lastName}
+                            </li>
+                            <li className='list-group-item'>
+                                <b>Role:</b>
+                                {user.role}
+                            </li>
+                            <li className='list-group-item'>
+                                <b>Phone number:</b>
+                                {user.phoneNumber}
                             </li>
                             <li className='list-group-item'>
                                 <b>Email:</b>
                                 {user.email}
+                            </li>
+                            <li className='list-group-item'>
+                                <b>Password:</b>
+                                {user.password}
                             </li>
                         </ul>
                     </div>
