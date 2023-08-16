@@ -7,19 +7,22 @@ const AddUser = () => {
     let navigate = useNavigate()
 
     const [user, setUser] = useState({
-        name: "",
-        username: "",
-        email: ""
+        firstName: "",
+        lastName: "",
+        role:"",
+        email: "",
+        phoneNumber: "",
+        password:""
     })
 
-    const {name, username, email} = user
+    const {firstName, lastName, role, email, phoneNumber, password} = user
     const onInputChange = (e) => {
         setUser({...user, [e.target.name]: e.target.value})
     }
 
     const onSubmit = async (e) => {
         e.preventDefault() //to avoid showing user detail on uri 
-        await axios.post("http://localhost:8080/user", user)
+        await axios.post("http://localhost:8080/addUser", user)
         navigate("/")
     }
 
@@ -30,28 +33,54 @@ const AddUser = () => {
                 <h3 className='text-center m-4'>Register user</h3>
                 <form onSubmit={(e) => onSubmit(e)}>
                     <div className='mb-3'>
-                    <label htmlFor='Name' className='form-label'> 
-                    Name
+                    <label htmlFor='FirstName' className='form-label'> 
+                    Fist name
                     </label>
                     <input
                     type={"text"}
                     className="form-control"
-                    placeholder='Enter your name'
-                    name="name"
-                    value = {user.name}
+                    placeholder='Enter first name'
+                    name="firstName"
+                    value = {user.firstName}
                     onChange = {(e) => onInputChange(e)}
                     />
                 </div>
                 <div className='mb-3'>
-                    <label htmlFor='UserName' className='form-label'> 
-                    Username
+                    <label htmlFor='Lastname' className='form-label'> 
+                    Last name
                     </label>
                     <input
                     type={"text"}
                     className="form-control"
-                    placeholder='Enter your username'
-                    name="username"
-                    value = {user.username}
+                    placeholder='Enter last name'
+                    name="lastName"
+                    value = {user.lastName}
+                    onChange = {(e) => onInputChange(e)}
+                    />
+                </div>
+                <div className='mb-3'>
+                    <label htmlFor='Role' className='form-label'> 
+                    Role
+                    </label>
+                    <input
+                    type={"text"}
+                    className="form-control"
+                    placeholder="Enter user's role"
+                    name="role"
+                    value = {user.role}
+                    onChange = {(e) => onInputChange(e)}
+                    />
+                </div>
+                <div className='mb-3'>
+                    <label htmlFor='Phone number' className='form-label'> 
+                    Phone number
+                    </label>
+                    <input
+                    type={"text"}
+                    className="form-control"
+                    placeholder='Enter phone number'
+                    name="phoneNumber"
+                    value = {user.phoneNumber}
                     onChange = {(e) => onInputChange(e)}
                     />
                 </div>
@@ -62,9 +91,22 @@ const AddUser = () => {
                     <input
                     type={"text"}
                     className="form-control"
-                    placeholder='Enter your email'
+                    placeholder='Enter email'
                     name="email"
                     value = {user.email}
+                    onChange = {(e) => onInputChange(e)}
+                    />
+                </div>
+                <div className='mb-3'>
+                    <label htmlFor='Password' className='form-label'> 
+                    Password
+                    </label>
+                    <input
+                    type={"text"}
+                    className="form-control"
+                    placeholder='Enter a default password'
+                    name="password"
+                    value = {user.password}
                     onChange = {(e) => onInputChange(e)}
                     />
                 </div>

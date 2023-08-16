@@ -31,9 +31,12 @@ const Home = () => {
                 <thead>
                     <tr>
                     <th scope="col">Id</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Username</th>
+                    <th scope="col">First name</th>
+                    <th scope="col">Last name</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Phone number</th>
                     <th scope="col">Email</th>
+                    <th scope="col">Password</th>
                     <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -42,16 +45,25 @@ const Home = () => {
                 {
                     users.map((user, index) => (
                     <tr>
-                    <th scope="row" key={index}>{index + 1}</th>
-                    <td>{user.name}</td>
-                    <td>{user.username}</td>
+                    <th scope="row" key={index}>{user.id}</th>
+                    <td>{user.firstName}</td>
+                    <td>{user.lastName}</td>
+                    <td>{user.role}</td>
+                    <td>{user.phoneNumber}</td>
                     <td>{user.email}</td>
+                    <td>{user.password}</td>
                     <td>
-                        <Link className='btn btn-primary mx-2' to={`/viewUser/${user.id}`}>View</Link>
+                        <Link 
+                        className='btn btn-primary mx-2' 
+                        to={`/viewUser/${user.id}`}>
+                        View
+                        </Link>
                         <Link className='btn btn-outline-primary mx-2' to={`/editUser/${user.id}`}>Edit</Link>
                         <button 
                         className='btn btn-danger mx-2'
-                        onClick={()=> deleteUser(user.id)}>Delete</button>
+                        onClick={()=> deleteUser(user.id)}
+                        >Delete
+                        </button>
                     </td>
                     </tr>
                     ))
